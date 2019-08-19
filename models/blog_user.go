@@ -2,21 +2,26 @@ package models
 
 import (
 	"database/sql"
-	"encoding/json"
-	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 )
 
-type Bloguser struct {
-	id       int        `json:"id"`
-	username string		`json:"username"`
-	password string		`json:"password"`
-	email    string		`json:"email"`
-	roles    int		`json:"roles"`
+var(
+	UserAllList map[int]*bloguser
+)
+
+type bloguser struct {
+	Id       int        `json:"Id"`
+	Username string		`json:"Username"`
+	Password string		`json:"Password"`
+	Email    string		`json:"Email"`
+	Roles    int		`json:"Roles"`
 }
 
-func BlogAllUser()  {
+func BlogAllUser()map[int]*bloguser  {
+
+	UserAllList = make(map[int]*bloguser)
+
 	db,err := sql.Open("sqlite3","./database/blog.db")
 	if err != nil {
 		log.Fatal(err)
@@ -30,32 +35,28 @@ func BlogAllUser()  {
 	defer rows.Close()
 
 	for rows.Next(){
-		var ID       int
-		var USERNAME string
-		var PASSWORD string
-		var EMAIL    string
-		var ROLES    int
-		err = rows.Scan(&ID,&USERNAME,&PASSWORD,&EMAIL,&ROLES)
+
+		var a bloguser
+
+		err = rows.Scan(&a.Id,&a.Username,&a.Password,&a.Email,&a.Roles)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		var a map[string] *Bloguser
-		 = ID
-		a.username = USERNAME
-		a.password = PASSWORD
-		a.email = EMAIL
-		a.roles = ROLES
+		//fmt.Println(a)
 
-		fmt.Println(a)
-
+		//aa,err := json.Marshal(a)
+		//if err != nil {
+		//	log.Fatal(err)
+		//}
+		//fmt.Println(string(aa))
 
 
-		aa,err := json.Marshal(a)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(string(aa))
+		//bb := string(aa)
+
+		UserAllList[a.Id] = &bloguser{a.Id,a.Username,a.Password,a.Email,a.Roles}
+
+
 	}
-
+	return UserAllList
 }

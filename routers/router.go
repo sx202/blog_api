@@ -40,5 +40,6 @@ func init() {
 	}))
 
 	beego.Router("/user", &controllers.UserController{}, "GET:GetAll")
+	beego.Router("/bloguser", &controllers.UserController{}, "GET:Bloguser")
 
 }

@@ -117,3 +117,8 @@ func (u *UserController) Logout() {
 	u.ServeJSON()
 }
 
+func (u *UserController) Bloguser() {
+	bloguser := models.BlogAllUser()
+	u.Data["json"] = bloguser
+	u.ServeJSON()
+}
