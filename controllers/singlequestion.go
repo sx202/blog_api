@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
-	"github.com/sx202/blog_api/models"
 )
 
 type SingleQuestion struct {
@@ -10,7 +10,10 @@ type SingleQuestion struct {
 }
 
 func (c *SingleQuestion) singleQuestion() {
-	singlequestion := models.SingleQuestion()
-	c.Data["json"] = singlequestion
-	c.ServeJSON()
+
+	txt := c.Ctx.Input.RequestBody
+	fmt.Println(txt)
+	//singlequestion := models.SingleQuestion()
+	//c.Data["json"] = singlequestion
+	//c.ServeJSON()
 }
