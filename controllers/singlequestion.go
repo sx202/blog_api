@@ -14,7 +14,7 @@ func (c *SingleQuestion) Singlequestion() {
 	//c.Ctx.WriteString("hello")
 	txt := c.Ctx.Input.RequestBody
 	c.Ctx.WriteString(string(txt))
-	singlequestion := models.QuerySingleQuestion(string(txt))
+	singlequestion := models.GetSingleQuestion(string(txt))
 	c.Data["json"] = singlequestion
 	c.ServeJSON()
 }

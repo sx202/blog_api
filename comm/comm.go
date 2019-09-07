@@ -1,5 +1,13 @@
 package comm
 
+type Bloguser struct {
+	Id       int        `json:"Id"`
+	Username string		`json:"Username"`
+	Password string		`json:"Password"`
+	Email    string		`json:"Email"`
+	Roles    int		`json:"Roles"`
+}
+
 type Question struct {
 	Id              int     `json:"id"`
 	Question        string  `json:"Question"`

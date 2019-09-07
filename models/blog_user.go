@@ -3,24 +3,19 @@ package models
 import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/sx202/blog_api/comm"
 	"log"
 )
 
 var(
-	UserAllList map[int]*bloguser
+	UserAllList map[int]*comm.Bloguser
 )
 
-type bloguser struct {
-	Id       int        `json:"Id"`
-	Username string		`json:"Username"`
-	Password string		`json:"Password"`
-	Email    string		`json:"Email"`
-	Roles    int		`json:"Roles"`
-}
 
-func BlogAllUser()map[int]*bloguser  {
 
-	UserAllList = make(map[int]*bloguser)
+func BlogAllUser()map[int]*comm.Bloguser  {
+
+	UserAllList = make(map[int]*comm.Bloguser)
 
 	db,err := sql.Open("sqlite3","./database/blog.db")
 	if err != nil {
@@ -36,25 +31,15 @@ func BlogAllUser()map[int]*bloguser  {
 
 	for rows.Next(){
 
-		var a bloguser
+		var a comm.Bloguser
 
 		err = rows.Scan(&a.Id,&a.Username,&a.Password,&a.Email,&a.Roles)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		//fmt.Println(a)
 
-		//aa,err := json.Marshal(a)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
-		//fmt.Println(string(aa))
-
-
-		//bb := string(aa)
-
-		UserAllList[a.Id] = &bloguser{a.Id,a.Username,a.Password,a.Email,a.Roles}
+		UserAllList[a.Id] = &comm.Bloguser{a.Id,a.Username,a.Password,a.Email,a.Roles}
 
 
 	}
