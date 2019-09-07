@@ -43,5 +43,8 @@ func init() {
 	beego.Router("/bloguser", &controllers.UserController{}, "GET:Bloguser")
 	beego.Router("/viewquestionall", &controllers.Viewquestionall{}, "GET:Questionall")
 
+	beego.Router("/single_question", &controllers.SingleQuestion{}, "GET:Singlequestion")
+	beego.Router("/", &controllers.INDEX{},"*:Index")
+
 
 }

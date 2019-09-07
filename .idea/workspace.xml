@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="573881da-6bb2-4b6b-91b3-048c237de9ea" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="573881da-6bb2-4b6b-91b3-048c237de9ea" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/comm/comm.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/index.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog_api" beforeDir="false" afterPath="$PROJECT_DIR$/blog_api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/singlequestion.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/singlequestion.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lastupdate.tmp" beforeDir="false" afterPath="$PROJECT_DIR$/lastupdate.tmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Viewquestionall.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Viewquestionall.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/singlequestion.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+    </list>
+>>>>>>> e98f362bd49e8e33a58254d29705417ab3bb0b37
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +144,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="692" extended-state="1" />
     <editor active="true" />
@@ -152,6 +169,33 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+=======
+  <component name="RunManager" selected="Go Build.go build test.go">
+    <configuration name="go build singlequestion.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="blog_api" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/controllers/singlequestion.go" />
+      <package value="github.com/sx202/blog_api" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build test.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="blog_api" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/test.go" />
+      <package value="github.com/sx202/blog_api" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build test.go" />
+        <item itemvalue="Go Build.go build singlequestion.go" />
+      </list>
+    </recent_temporary>
+>>>>>>> e98f362bd49e8e33a58254d29705417ab3bb0b37
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />

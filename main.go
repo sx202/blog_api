@@ -12,7 +12,7 @@ func main() {
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 
-	//models.BlogAllUser()
+
 
 	beego.Run()
 }
