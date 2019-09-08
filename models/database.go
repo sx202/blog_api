@@ -126,15 +126,71 @@ func InsertSingleQuestion(question comm.Question)(err error)  {
 
 func UpdateSingleQuestion(newquestion *comm.Question,oldquestion *comm.Question)(err error)  {
 
+	m := map[string]string{}
+
 	db,err := LinkDb()
 	if err == nil {
 		if newquestion.Question != oldquestion.Question {
-
-		}else {
-			if newquestion.OptionA != oldquestion.OptionA {
-
-			}
+			m["Question"] = newquestion.Question
 		}
+		///这是优化代码，没有试验不太干确定
+		//s := [7]string{"A","B","C","D","E","F","G"}
+		//for i:=0;i<len(s);i++ {
+		//	option := "Option"+s[i]
+		//	newOption := "newquestion.Option"+ s[i]
+		//	oldOption := "oldquestion.Option"+ s[i]
+		//
+		//	if  newOption != oldOption{
+		//		m[option] = newOption
+		//	}
+		//}
+		///这段代码和上面的代码功能一样
+		if newquestion.OptionA != oldquestion.OptionA {
+			m["OptionA"] = newquestion.OptionA
+		}
+		if newquestion.OptionB != oldquestion.OptionB {
+			m["OptionB"] = newquestion.OptionB
+		}
+		if newquestion.OptionC != oldquestion.OptionC {
+			m["OptionC"] = newquestion.OptionC
+		}
+		if newquestion.OptionD != oldquestion.OptionD {
+			m["OptionD"] = newquestion.OptionD
+		}
+		if newquestion.OptionE != oldquestion.OptionE {
+			m["OptionE"] = newquestion.OptionE
+		}
+		if newquestion.OptionF != oldquestion.OptionF {
+			m["OptionF"] = newquestion.OptionF
+		}
+		if newquestion.OptionG != oldquestion.OptionG {
+			m["OptionG"] = newquestion.OptionG
+		}
+
+		if newquestion.CorrectAnswer1 != oldquestion.CorrectAnswer1 {
+			m["CorrectAnswer1"] = newquestion.CorrectAnswer1
+		}
+		if newquestion.CorrectAnswer2 != oldquestion.CorrectAnswer2 {
+			m["CorrectAnswer2"] = newquestion.CorrectAnswer2
+		}
+		if newquestion.CorrectAnswer3 != oldquestion.CorrectAnswer3 {
+			m["CorrectAnswer3"] = newquestion.CorrectAnswer3
+		}
+		if newquestion.CorrectAnswer4 != oldquestion.CorrectAnswer4 {
+			m["CorrectAnswer4"] = newquestion.CorrectAnswer4
+		}
+		if newquestion.CorrectAnswer5 != oldquestion.CorrectAnswer5 {
+			m["CorrectAnswer5"] = newquestion.CorrectAnswer5
+		}
+		if newquestion.CorrectAnswer6 != oldquestion.CorrectAnswer6 {
+			m["CorrectAnswer6"] = newquestion.CorrectAnswer6
+		}
+		if newquestion.CorrectAnswer7 != oldquestion.CorrectAnswer7 {
+			m["CorrectAnswer7"] = newquestion.CorrectAnswer7
+		}
+
+		
+
 	}
 
 	return err

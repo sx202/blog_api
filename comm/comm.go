@@ -27,4 +27,8 @@ type Question struct {
 	CorrectAnswer7 	string	`json:"Correct_Answer_7"`
 }
 
+type ChangeQuestion struct {
+	key   string
+	value string
+}
 
