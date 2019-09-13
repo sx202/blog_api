@@ -10,7 +10,7 @@ import (
 //使用切片存储题库中id字段的值，这样做的原因是：在数据库中id字段虽然是不重复递增，
 //但是并不连续，为了能够顺序遍历，所以就把id字段的值插入到一个切片中，然后通过遍历
 //切片的方式来达到遍历题库中每一条记录的目的。
-var ID []int
+var QuestionID []int
 
 //初始化数据库的连接
 func LinkDb()(db *sql.DB,err error) {
@@ -22,35 +22,13 @@ func LinkDb()(db *sql.DB,err error) {
 	return db,err
 }
 
-//获取题库中每个题的id值,没有返回值
-//func getId()(err error) {
-//
-//	db,err := LinkDb()
-//
-//	if err == nil {
-//		rows,err := db.Query("SELECT id FROM question_063")
-//		if err == nil{
-//			for rows.Next(){
-//				var id int
-//				err = rows.Scan(&id)
-//				if err == nil{
-//					ID = append(ID,id)
-//					err = nil
-//				}
-//			}
-//		}
-//	}
-//	return err
-//}
+
 
 //返回所有题的id的值
-func GetId() (s []int,err error)  {
+func GetQuestionId() (s []int,err error)  {
 	
-	if len(ID) < 1 {
-		//err := getId()
-		//if err != nil {
-		//	return nil,err
-		//}
+	if len(QuestionID) < 1 {
+
 		db,err := LinkDb()
 
 		if err == nil {
@@ -60,18 +38,18 @@ func GetId() (s []int,err error)  {
 					var id int
 					err = rows.Scan(&id)
 					if err == nil{
-						ID = append(ID,id)
+						QuestionID = append(QuestionID,id)
 						//err = nil
 					}
 				}
 			}
 		}
 	}
-	return ID,err
+	return QuestionID,err
 }
 
 //获取指定题的内容
-func GetSingleQuestion(txt string)(m map[int]*comm.Question,err error) {
+func GetQuestion(txt string)(m map[int]*comm.Question,err error) {
 
 	question := make(map[int]*comm.Question)
 	question=nil
@@ -120,7 +98,7 @@ func GetAllQuestion()(m map[int]*comm.Question,err error) {
 }
 
 //往数据库中插入一道题
-func InsertSingleQuestion(question comm.Question)(err error)  {
+func InsertQuestion(question comm.Question)(err error)  {
 
 	db,err := LinkDb()
 	if err == nil {
@@ -140,7 +118,7 @@ func InsertSingleQuestion(question comm.Question)(err error)  {
 }
 
 //更新题库中指定的一条题库内容
-func UpdateSingleQuestion(newquestion *comm.Question,oldquestion *comm.Question,id int)(err error)  {
+func UpdateQuestion(newquestion *comm.Question,oldquestion *comm.Question,id int)(err error)  {
 
 	m := map[string]string{}
 
@@ -227,7 +205,7 @@ func UpdateSingleQuestion(newquestion *comm.Question,oldquestion *comm.Question,
 }
 
 //删除指定考题
-func DeleteSingleQuestion(id int)(err error)  {
+func DeleteQuestion(id int)(err error)  {
 	db,err := LinkDb()
 	if err == nil {
 		tx,err := db.Begin()
