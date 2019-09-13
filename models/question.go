@@ -23,36 +23,51 @@ func LinkDb()(db *sql.DB,err error) {
 }
 
 //获取题库中每个题的id值,没有返回值
-func getId()(err error) {
-
-	db,err := LinkDb()
-
-	if err == nil {
-		rows,err := db.Query("SELECT id FROM question_063")
-		if err == nil{
-			for rows.Next(){
-				var id int
-				err = rows.Scan(&id)
-				if err == nil{
-					ID = append(ID,id)
-					err = nil
-				}
-			}
-		}
-	}
-	return err
-}
+//func getId()(err error) {
+//
+//	db,err := LinkDb()
+//
+//	if err == nil {
+//		rows,err := db.Query("SELECT id FROM question_063")
+//		if err == nil{
+//			for rows.Next(){
+//				var id int
+//				err = rows.Scan(&id)
+//				if err == nil{
+//					ID = append(ID,id)
+//					err = nil
+//				}
+//			}
+//		}
+//	}
+//	return err
+//}
 
 //返回所有题的id的值
 func GetId() (s []int,err error)  {
 	
-	if len(ID) <1 {
-		err := getId()
-		if err != nil {
-			return nil,err
+	if len(ID) < 1 {
+		//err := getId()
+		//if err != nil {
+		//	return nil,err
+		//}
+		db,err := LinkDb()
+
+		if err == nil {
+			rows,err := db.Query("SELECT id FROM question_063")
+			if err == nil{
+				for rows.Next(){
+					var id int
+					err = rows.Scan(&id)
+					if err == nil{
+						ID = append(ID,id)
+						//err = nil
+					}
+				}
+			}
 		}
 	}
-	return ID,nil
+	return ID,err
 }
 
 //获取指定题的内容
