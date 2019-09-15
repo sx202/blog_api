@@ -44,11 +44,13 @@ func init() {
 	beego.Router("/user", &controllers.UserController{}, "GET:GetAll")
 	beego.Router("/bloguser", &controllers.UserController{}, "GET:Bloguser")
 
-	beego.Router("/question", &controllers.System{}, "GET:GetQuestion")
-	beego.Router("/questionall", &controllers.System{}, "GET:GetAllQuestion")
+	beego.Router("/getquestionid", &controllers.System{}, "GET:GetQuestionId")
+
+	beego.Router("/getquestion", &controllers.System{}, "GET:GetQuestion")
+	beego.Router("/getquestionall", &controllers.System{}, "GET:GetAllQuestion")
 	beego.Router("/insertquestion", &controllers.System{}, "POST:InsertQuestion")
-
-
+	beego.Router("/updatequestion", &controllers.System{}, "POST:UpdateQuestion")
+	beego.Router("/deletequestion", &controllers.System{}, "POST:DeleteQuestion")
 
 
 

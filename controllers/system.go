@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/sx202/blog_api/comm"
 	"github.com/sx202/blog_api/models"
+	"strconv"
 )
 
 type System struct {
@@ -25,12 +26,16 @@ func (c *System) GetQuestionId ()  {
 
 func (c *System) GetQuestion()  {
 
-	//注意这个地方传数据没有用json格式，而是简单的传了一个字符（题号）
 	txt := c.Ctx.Input.RequestBody
 
-	singlequestion,err := models.GetQuestion(string(txt))
+	num,err := strconv.Atoi(string(txt))
 	if err == nil {
-		c.Data["json"] = singlequestion
+		singlequestion,err := models.GetQuestion(num)
+		if err == nil {
+			c.Data["json"] = singlequestion
+		}else {
+			c.Data["json"] = err.Error()
+		}
 	}else {
 		c.Data["json"] = err.Error()
 	}
@@ -70,9 +75,38 @@ func (c *System) InsertQuestion ()  {
 
 func (c *System) UpdateQuestion ()  {
 
+	var question comm.Question
+
+	err := json.Unmarshal(c.Ctx.Input.RequestBody, &question)
+	if err == nil {
+		err = models.UpdateQuestion(question)
+		if err == nil {
+			c.Data["json"] = []string{"updatequestion","ok"}
+		}else {
+			c.Data["json"] = err.Error()
+		}
+	}else {
+		c.Data["json"] = err.Error()
+	}
+
+	c.ServeJSON()
 
 }
 
 func (c *System) DeleteQuestion ()  {
 
+	txt := c.Ctx.Input.RequestBody
+
+	num,err := strconv.Atoi(string(txt))
+	if err == nil {
+		err = models.DeleteQuestion(num)
+		if err == nil {
+			c.Data["json"] = []string{"deletequestion","ok"}
+		}else {
+			c.Data["json"] = err.Error()
+		}
+	}else {
+		c.Data["json"] = err.Error()
+	}
+	c.ServeJSON()
 }
