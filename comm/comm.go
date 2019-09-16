@@ -32,3 +32,11 @@ type ChangeQuestion struct {
 	value string
 }
 
+type User struct {
+	Id         int     `json:"id"`
+	UserName   string  `json:"username"`
+	PassWord   string  `json:"password"`
+	Email      string  `json:"email"`
+	Roles       string  `json:"roles"`
+}
+

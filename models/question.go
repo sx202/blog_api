@@ -1,9 +1,9 @@
 package models
 
 import (
-	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/sx202/blog_api/comm"
+	"github.com/sx202/blog_api/database"
 )
 
 //使用切片存储题库中id字段的值，这样做的原因是：在数据库中id字段虽然是不重复递增，
@@ -11,24 +11,12 @@ import (
 //切片的方式来达到遍历题库中每一条记录的目的。
 var QuestionID []int
 
-//初始化数据库的连接
-func linkDb()(db *sql.DB,err error) {
-
-	db,err = sql.Open("sqlite3","./database/blog.db")
-	if err != nil {
-		return nil,err
-	}
-	return db,err
-}
-
-
-
 //返回所有题的id的值
 func GetQuestionId() (s []int,err error)  {
 	
 	if len(QuestionID) < 1 {
 
-		db,err := linkDb()
+		db,err := database.LinkDb()
 
 		if err == nil {
 			rows,err := db.Query("SELECT id FROM question_063")
@@ -52,14 +40,15 @@ func GetQuestion(num int)(m comm.Question,err error) {
 
 	var question comm.Question
 
-	db,err := linkDb()
+	db,err := database.LinkDb()
 	if err == nil {
 		stmt,err := db.Prepare("SELECT * FROM question_063 WHERE id = ? LIMIT 1")
 		if err == nil {
 			var b comm.Question
-			err=stmt.QueryRow(num).Scan(&b.Question, &b.OptionA,&b.OptionB,&b.OptionC,&b.OptionD,&b.OptionE,&b.OptionF,&b.OptionG,&b.CorrectAnswer1,&b.CorrectAnswer2,&b.CorrectAnswer3,&b.CorrectAnswer4,&b.CorrectAnswer5,&b.CorrectAnswer6,&b.CorrectAnswer7)
-			if err == nil{
+			err=stmt.QueryRow(num).Scan(&b.Id,&b.Question, &b.OptionA,&b.OptionB,&b.OptionC,&b.OptionD,&b.OptionE,&b.OptionF,&b.OptionG,&b.CorrectAnswer1,&b.CorrectAnswer2,&b.CorrectAnswer3,&b.CorrectAnswer4,&b.CorrectAnswer5,&b.CorrectAnswer6,&b.CorrectAnswer7)
+			if err == nil {
 				question = comm.Question{b.Id,b.Question,b.OptionA,b.OptionB,b.OptionC,b.OptionD,b.OptionE,b.OptionF,b.OptionG,b.CorrectAnswer1,b.CorrectAnswer2,b.CorrectAnswer3,b.CorrectAnswer4,b.CorrectAnswer5,b.CorrectAnswer6,b.CorrectAnswer7}
+				question = b
 			}
 		}
 	}
@@ -72,7 +61,7 @@ func GetAllQuestion()(m map[int]*comm.Question,err error) {
 	QuestionList := make(map[int]*comm.Question)
 	QuestionList = nil
 
-	db,err := linkDb()
+	db,err := database.LinkDb()
 	if err == nil {
 		//这条查询语句，因为是出题系统，数据量不会太大，所以没有加限制条件
 		rows,err := db.Query("SELECT * FROM question_063")
@@ -94,7 +83,7 @@ func GetAllQuestion()(m map[int]*comm.Question,err error) {
 //往数据库中插入一道题
 func InsertQuestion(question comm.Question)(err error)  {
 
-	db,err := linkDb()
+	db,err := database.LinkDb()
 	if err == nil {
 		tx,err := db.Begin()
 		if err == nil {
@@ -118,7 +107,7 @@ func UpdateQuestion(newquestion comm.Question)(err error)  {
 
 	oldquestion,err := GetQuestion(newquestion.Id)
 
-	db,err := linkDb()
+	db,err := database.LinkDb()
 	if err == nil {
 		tx,err := db.Begin()
 		if err == nil {
@@ -202,7 +191,7 @@ func UpdateQuestion(newquestion comm.Question)(err error)  {
 
 //删除指定考题
 func DeleteQuestion(id int)(err error)  {
-	db,err := linkDb()
+	db,err := database.LinkDb()
 	if err == nil {
 		tx,err := db.Begin()
 		if err == nil {
